@@ -21,9 +21,6 @@ class RecipeController extends AbstractController
      */
     public function lunch()
     {
-        $mess = $this->recipeService->getAvailable();
-        return $this->json([
-            'message' => $mess
-        ]);
+        return $this->json($this->recipeService->getAvailable());
     }
 }
