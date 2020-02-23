@@ -7,6 +7,15 @@ use stdClass;
 
 class IngredientService
 {
+    /**
+     * Get available ingredients
+     *
+     * @param string $source File path of the ingredients json data
+     *
+     * @return array An array which contain:
+     *                  - titles: a list of titles only
+     *                  - objs: store full ingredient data
+     */
     public function getAvailable($source)
     {
         $fileService = new FileService();

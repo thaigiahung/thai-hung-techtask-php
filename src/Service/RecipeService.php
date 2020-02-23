@@ -7,6 +7,14 @@ use App\Service\IngredientService;
 
 class RecipeService
 {
+    /**
+     * Get available recipes
+     *
+     * @param string $recipe_src File path of the recipes json data
+     * @param string $ingredient_src File path of the ingredients json data
+     *
+     * @return array A list of recipes
+     */
     public function getAvailable(String $recipe_src, String $ingredient_src)
     {
         $ingredientService = new IngredientService();
@@ -35,6 +43,14 @@ class RecipeService
         return $available;
     }
 
+    /**
+     * Find the least fresh ingredient of a single recipe
+     *
+     * @param object $recipe The recipe which contain of list of ingredients
+     * @param object $ingredients A list of ingredients with their date
+     *
+     * @return object The least fresh ingredient or null if it doesn't exist
+     */
     public function findOldestIngredient(Object $recipe, Object $ingredients)
     {
         $arr = [];
