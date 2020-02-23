@@ -7,24 +7,13 @@ use App\Service\IngredientService;
 
 class RecipeService
 {
-    private $fileService, $ingredientService;
-
-    public function __construct(
-        FileService $fileService,
-        IngredientService $ingredientService
-    )
+    public function getAvailable(String $recipe_src, String $ingredient_src)
     {
-        $this->fileService = $fileService;
-        $this->ingredientService = $ingredientService;
-    }
+        $ingredientService = new IngredientService();
+        $ingredients = $ingredientService->getAvailable($ingredient_src);
 
-    public function getAvailable()
-    {
-        $ingredients = $this->ingredientService->getAvailable();
-
-        $recipes = $this->fileService->read(
-            '/src/App/Recipe/data.json'
-        );
+        $fileService = new FileService();
+        $recipes = $fileService->read($recipe_src);
         $recipes = $recipes->recipes;
 
         $available = [];
@@ -33,7 +22,7 @@ class RecipeService
             $recipe_ingre = $recipe->ingredients;
 
             $oldest = $this->findOldestIngredient($recipe, $ingredients['objs']);
-            $recipe->oldest = $oldest->{'best-before'};
+            $recipe->oldest = $oldest->{'best-before'} ?? null;
 
             $intersect = array_intersect($ingredients['titles'], $recipe_ingre);
             if (count($intersect) == count($recipe_ingre)) {

@@ -6,16 +6,9 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class FileService
 {
-    private $projectDir;
-
-    public function __construct(KernelInterface $kernel)
+    public function read(String $source)
     {
-        $this->projectDir = $kernel->getProjectDir();
-    }
-
-    public function read(String $filePath)
-    {
-        $file = file_get_contents($this->projectDir.$filePath);
+        $file = file_get_contents($source);
         return json_decode($file);
     }
 }
