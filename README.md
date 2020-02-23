@@ -12,6 +12,21 @@
     ```
     php bin/phpunit --coverage-text
     ```
+
+    Note: if you receive "Could not open input file: bin/phpunit" error, please remove this package by running
+
+    ```
+    composer remove symfony/phpunit-bridge
+    ```
+
+    Then, re-install it by:
+
+    ```
+    composer require --dev symfony/phpunit-bridge
+    ```
+
+    The issue was mentioned here: [https://symfony.com/doc/current/testing.html#the-phpunit-testing-framework](https://symfony.com/doc/current/testing.html#the-phpunit-testing-framework)
+
 1. Start application:
     ```
     symfony server:start
